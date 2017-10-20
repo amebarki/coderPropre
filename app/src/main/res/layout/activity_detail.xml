@@ -7,7 +7,7 @@
     tools:context="adam.com.coderpropre.DetailActivity">
 
     <Button
-        android:id="@+id/rate"
+        android:id="@+id/detail_rate_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="RATE"
@@ -20,14 +20,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/rateTextView"
+        android:id="@+id/detail_rate_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Response"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
         android:layout_marginEnd="12dp"
-        app:layout_constraintRight_toRightOf="@+id/rate"
+        app:layout_constraintRight_toRightOf="@+id/detail_rate_button"
         android:layout_marginTop="97dp"
-        app:layout_constraintTop_toBottomOf="@+id/rate" />
+        app:layout_constraintTop_toBottomOf="@+id/detail_rate_button" />
 </android.support.constraint.ConstraintLayout>

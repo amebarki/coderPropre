@@ -8,58 +8,52 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import BLEManager.BLEManager;
+import Device.Device;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
 
-    public Button connectButton;
-    public Button detailButton;
-    public TextView connectTextView;
+    private Button button_connect;
+    private Button button_detail;
+    private TextView connectTextView;
+    private Device device_main;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        connectButton = (Button) findViewById(R.id.connect);
-        detailButton = (Button) findViewById(R.id.detail);
-        connectTextView = (TextView) findViewById(R.id.connectTextView);
-        connectButton.setOnClickListener(this);
-        detailButton.setOnClickListener(this);
-        if(BLEManager.getInstance().getIsConnect())
-        {
-            connectTextView.setText("TRUE");
-            connectButton.setText("Connect");
-        }
-        else
-        {
-            connectTextView.setText("FALSE");
-            connectButton.setText("Disconnect");
-        }
+        button_connect = (Button) findViewById(R.id.main_connect_button);
+        button_detail = (Button) findViewById(R.id.main_detail_button);
+        connectTextView = (TextView) findViewById(R.id.main_connect_textView);
+        device_main = new Device();
+        this.initialize();
     }
 
     @Override
-    public void onClick(View view)
-    {
-        if(view.getId() == connectButton.getId())
-        {
+    public void onClick(View view) {
+        if (view.getId() == button_connect.getId()) {
             BLEManager.getInstance().setIsConnect();
-            if(BLEManager.getInstance().getIsConnect())
-            {
-                connectTextView.setText("TRUE");
-                connectButton.setText("Connect");
-            }
-            else
-            {
-                connectTextView.setText("FALSE");
-                connectButton.setText("Disconnect");
-            }
+            BLEManager.getInstance().connectDevice(device_main);
+
         }
-        if(view.getId() == detailButton.getId())
-        {
-            Intent i = new Intent(getBaseContext(), DetailActivity.class);
-            startActivity(i);
+        if (view.getId() == button_detail.getId()) {
+           // Intent i = new Intent(getBaseContext(), DetailActivity.class);
+           // startActivity(i);
+            connectTextView.setText(BLEManager.getInstance().getRate() + "");
+        }
+    }
+
+
+    public void initialize() {
+        button_connect.setOnClickListener(this);
+        button_detail.setOnClickListener(this);
+        if (BLEManager.getInstance().getIsConnect()) {
+            connectTextView.setText("TRUE");
+            button_connect.setText("Connect");
+        } else {
+            connectTextView.setText("FALSE");
+            button_connect.setText("Disconnect");
         }
     }
 }
